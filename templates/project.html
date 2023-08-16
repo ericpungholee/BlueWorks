@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $('.dropdown-toggle').dropdown();
+        });
+    </script>
+    
+
+<style>
+    .centered-images {
+        display: flex;
+        justify-content: center;
+    }
+
+    .centered-images img {
+        max-width: 100%;
+    }
+
+    .invisible-card {
+        border: none;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .fixed-size-image {
+        max-width: 100%;
+        max-height: 400px;
+
+        object-fit: contain;
+    }
+
+
+    .fa-arrow-right,
+    .fa-arrow-left {
+        color: rgb(220, 211, 211);
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .carousel-control-prev {
+        left: -5%;
+
+    }
+
+    .carousel-control-next {
+        right: -5%;
+    }
+</style>
+<div class="container mt-5">
+    <div class="card invisible-card">
+        {% if portfolio %}
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for picture_url in pictures %}
+                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                    <img class="d-block w-100 fixed-size-image" src="{{ url_for('static', filename=picture_url) }}"
+                        alt="Portfolio Picture">
+                </div>
+                {% endfor %}
+            </div>
+
+
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <i class="fa fa-arrow-left fa-2x"></i>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <i class="fa fa-arrow-right fa-2x"></i>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <br />
+
+        <h1>{{ portfolio.project_name }}</h1>
+        <p>{{ portfolio.description }}</p>
+        {% endif %}
+    </div>
+    {% if current_user.id == portfolio.company_id %}
+    <div class="btn-group">
+        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        </button>
+        <div class="dropdown-menu">
+            <form action="{{ url_for('delete_portfolio', portfolio_id=portfolio.id) }}" method="POST">
+                <input class="btn btn-danger btn-sm dropdown-item" type="submit" value="Delete">
+            </form>
+        </div>
+    </div>
+
+
+    {% endif %}
+
+</div>
+
+{% endblock content %}

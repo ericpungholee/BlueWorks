@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card bg-light">
+        <div class="card-body">
+            <form method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label for="{{ form.project_name.id }}" class="form-control-label">Project Name</label>
+                    {{ form.project_name(class="form-control") }}
+                    {% if form.project_name.errors %}
+                    {% for error in form.project_name.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.description.id }}" class="form-control-label">Description</label>
+                    {{ form.description(class="form-control") }}
+                    {% if form.description.errors %}
+                    {% for error in form.description.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+
+                <div class="form-group">
+                    <label class="form-control-label">Pictures</label>
+
+                    {% for i in range(1, 11) %}
+                    {% set picture_field = 'picture_' ~ i %}
+                    <div class="form-group">
+                        <label class="form-control-label">Picture {{ i }}</label>
+
+                        {{ form[picture_field](class="form-control-file") }}
+                        <small class="form-text text-muted">Please make sure the file type is either jpg, jpeg, png, or
+                            gif.</small>
+
+                        {% if form[picture_field].errors %}
+                        {% for error in form[picture_field].errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if form[picture_field].data %}
+                        <small class="form-text text-muted">
+                            Selected File: <span class="badge badge-secondary">{{ form[picture_field].data.filename
+                                }}</span>
+                        </small>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+

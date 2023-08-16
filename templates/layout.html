@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://kit.fontawesome.com/999ca2bb93.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .jumbotron {
+            background-image: url('static/plumbers-asbestos-exposure.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .bold-text {
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
+        }
+
+        .title-text {
+            font-weight: bold;
+
+            color: rgb(79, 139, 252);
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .custom-dropdown-menu {
+            width: 220px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+     
+        }
+
+        .custom-dropdown-menu a {
+            border-bottom: 1px solid #e8e8e8;
+     
+        }
+
+        .custom-dropdown-menu a:last-child {
+            border-bottom: none;
+
+        }
+    </style>
+    {% if title %}
+    <title>Blue Works - {{ title }}</title>
+    {% else %}
+    <title>Blue Works</title>
+    {% endif %}
+    <link rel="icon" href="{{ url_for('static', filename='blue-works-website-favicon-color.png') }}" type="image/png">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{{url_for('home')}}">
+                <img src="{{ url_for('static', filename='blue-works-low-resolution-logo-color-on-transparent-background.png') }}"
+                    alt="Logo" width="140" height="50">
+            </a>
+
+     
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Menu
+                        </a>
+                        <div class="dropdown-menu custom-dropdown-menu dropdown-menu-right"
+                            aria-labelledby="navbarDropdown">
+                            {% if current_user.is_authenticated %}
+                            <a class="dropdown-item" href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt"></i>
+                                Logout</a>
+                            {% else %}
+                            <a class="dropdown-item" href="{{url_for('account_type_signin')}}"><i
+                                    class="fas fa-user-plus"></i> Sign Up</a>
+                            <a class="dropdown-item" href="{{url_for('account_type_login')}}"><i
+                                    class="fas fa-sign-in-alt"></i> Log In</a>
+                            {% endif %}
+
+                            {% if current_user.is_authenticated %}
+                            {% if current_user.is_consumer %}
+                            <!-- Update Profile -->
+                            <a class="dropdown-item" href="{{ url_for('profile_update_consumer') }}"><i
+                                    class="fas fa-user-edit"></i> Update Profile</a>
+                            {% else %}
+                            <!-- Profile -->
+                            <a class="dropdown-item"
+                                href="{{ url_for('profile_company', username=current_user.username) }}"><i
+                                    class="fas fa-user-circle"></i> Profile</a>
+                            {% endif %}
+                            {% endif %}
+
+                            <a class="dropdown-item" href="{{url_for('about')}}"><i class="fas fa-info-circle"></i>
+                                About</a>
+                        </div>
+                    </li>
+                </ul>
+                <form method="POST" action="{{url_for('search')}}" class="form-inline ml-3">
+                    {{ form.hidden_tag() }}
+                    <input class="form-control mr-2" type="search" placeholder="Search Company" aria-label="Search"
+                        name="searched">
+                    <br />
+                    <br />
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i style="color: rgb(21, 127, 234);" class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    {% block content %}
+    {% endblock content %}
+
+    <section id="contact" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="mb-4">Contact</h2>
+                    <p class="lead mb-5">Feel free to contact via email or social media.</p>
+                    <a href="mailto:eric.pungho.lee@gmail.com" class="btn btn-outline-light text-dark mr-2"><i
+                            class="fas fa-envelope"></i> Email</a>
+                    <a href="https://github.com/ericpungholee" class="btn btn-outline-light text-dark mr-2"><i
+                            class="fab fa-github"></i> GitHub</a>
+                    <a href="https://www.linkedin.com/in/eric-lee-932502215/" class="btn btn-outline-light text-dark"><i
+                            class="fab fa-linkedin"></i> LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script>
+        $.noConflict();
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.dropdown-toggle').dropdown();
+        });
+    </script>
+
+
+</body>
+
+</html>

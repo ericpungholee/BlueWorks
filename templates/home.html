@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <p class="display-4 text-center bold-text" style="font-size: 50px;">Discover skilled and trustworthy local trades professionals for your home projects</p>
+           
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="container mt-5">
+        <div class="card-deck">
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card h-100">
+                        <img src="{{ url_for('static', filename='312971.png') }}" class="card-img-top" alt=""
+                            width="100%" height="auto">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title title-text">Plumbers</h3>
+                            <p class="card-text">Plumbers install, repair, and maintain plumbing systems for
+                                water supply, drainage, and sewage.</p>
+                            <div class="mt-auto">
+                                <a href="{{ url_for('plumber_companies') }}" class="btn btn-primary">Browse</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card h-100">
+                        <img src="{{ url_for('static', filename='2781865.png') }}" class="card-img-top" alt=""
+                            width="100%" height="auto">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title title-text">Electricians</h3>
+                            <p class="card-text">Electricians specialize in installing, repairing, and
+                                maintaining
+                                electrical systems, ensuring their safe and efficient operation.</p>
+                            <div class="mt-auto">
+                                <a href="{{ url_for('electrician_companies') }}" class="btn btn-primary">Browse</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card h-100">
+                        <img src="{{ url_for('static', filename='94096.png') }}" class="card-img-top" alt=""
+                            width="100%" height="auto">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title title-text">Carpenters</h3>
+                            <p class="card-text">Carpenters provide services for constructing, repairing, and
+                                installing wooden structures and fixtures, utilizing their skills in
+                                woodworking, joinery, and craftsmanship.</p>
+                            <div class="mt-auto">
+                                <a href="{{ url_for('carpenter_companies') }}" class="btn btn-primary">Browse</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card h-100">
+                        <img src="{{ url_for('static', filename='5910230.png') }}" class="card-img-top" alt=""
+                            width="100%" height="auto">
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title title-text">Handyman</h3>
+                            <p class="card-text">Handymen provide general repair and maintenance services for a
+                                variety of tasks, including plumbing, electrical work, painting, carpentry, and
+                                more.</p>
+                            <div class="mt-auto">
+                                <a href="{{ url_for('handyman_companies') }}" class="btn btn-primary">Browse</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

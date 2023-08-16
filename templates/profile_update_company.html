@@ -1,0 +1,343 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    .profile-section {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2vw;
+    
+        flex-wrap: wrap;
+    }
+
+    .profile-pic {
+        width: 150px;
+        height: 150px;
+        flex-shrink: 0;
+        margin-right: 2vw;
+
+        border-radius: 0%;
+     
+    }
+
+    .profile {
+        padding: 2vw;
+        color: #000;
+        max-width: 80%;
+        margin-left: auto;
+       
+        margin-right: auto;
+    }
+
+
+    .update {
+        font-size: 1.5vw;
+      
+    }
+
+  
+    @media (max-width: 768px) {
+
+    
+        .profile-pic {
+            width: 30vw;
+            height: 30vw;
+         
+        }
+
+        .profile {
+            padding: 4vw;
+        }
+    }
+
+    @media (max-width: 480px) {
+
+ 
+        .profile-pic {
+            width: 40vw;
+            height: 40vw;
+    
+        }
+
+        .profile {
+            padding: 5vw;
+        }
+
+        .update {
+            font-size: 3vw;
+        }
+    }
+
+    .update {
+        color: #4e4e4e;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        transition: background-color 0.3s ease;
+        font-size: 16px;
+
+        min-width: 120px;
+
+        text-align: center;
+
+    }
+
+    .update:hover {
+        background-color: #333;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    body {
+        overflow-y: hidden;
+    }
+
+    .profile-container {
+        height: calc(100vh - 120px);
+        overflow-y: auto;
+    }
+
+    .add-project-button {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        margin-left: 5px;
+        display: flex;
+        justify-content: left;
+    }
+</style>
+
+
+</style>
+<div class="profile-container">
+    <div class="profile">
+        <div class="profile-section">
+            <img src="{{ url_for('static', filename=company.logo) }}" class="article-img img-fluid profile-pic"
+                style="width: 150px; height: 150px; object-fit: cover;">
+            <div>
+                <h2 class="mt-0 accounting-heading">{{ current_user.username }}</h2>
+                <p class="text-secondary">{{ current_user.email }}</p>
+            </div>
+        </div>
+
+
+        <div class="card-body d-flex align-items-center">
+            <form method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Account Info</legend>
+                    <div class="form-group">
+                        <label class="col-form-label">{{ form.username.label }}</label>
+                        {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">{{ form.email.label }}</label>
+                        {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">{{ form.location_country.label }}</label>
+                        {% if form.location_country.errors %}
+                        {{ form.location_country(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.location_country.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.location_country(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">{{ form.location_province.label }}</label>
+                        {% if form.location_province.errors %}
+                        {{ form.location_province(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.location_province.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.location_province(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">{{ form.location_city.label }}</label>
+                        {% if form.location_city.errors %}
+                        {{ form.location_city(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.location_city.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.location_city(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">{{ form.address.label }}</label>
+                        {% if form.address.errors %}
+                        {{ form.address(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.address.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.address(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">{{ form.company_type.label }}</label>
+                        {% if form.address.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.company_type.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        {% for choice in form.company_type %}
+                        <div class="form-check">
+                            {{ choice(class="form-check-input") }}
+                            {{ choice.label(class="form-check-label") }}
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">{{ form.licenses.label }}</label>
+                        {% if form.licenses.errors %}
+                        {{ form.licenses(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.licenses.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.licenses(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">{{ form.bio.label }}</label>
+                        {% if form.bio.errors %}
+                        {{ form.bio(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.bio.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.bio(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">{{ form.phone.label }}</label>
+                        {% if form.phone.errors %}
+                        {{ form.phone(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.phone.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.phone(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" id="deleted_links" name="deleted_links" value="">
+                    </div>
+
+
+                    <div class="form-group" id="dynamic_links">
+                        <label class="col-form-label">{{ form.links.label }}</label>
+                        <button id="add_link" class="btn btn-secondary btn-sm">Add link</button>
+                        {% for link in form.links %}
+                        {{ link.hidden_tag() }}
+                        <div class="mb-2">
+                            {% if link.link.errors %}
+                            {{ link.link(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in link.link.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ link.link(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-form-label">{{ form.logo.label }}</label>
+                        <br />
+                        <img src="{{ url_for('static', filename=company.logo) }}" class="profile-img img-fluid"
+                            style="width: 200px; height: 200px; object-fit: cover;">
+                        <br />
+                        <br />
+                        {{ form.logo(class="form-control-file") }}
+                        <small>Please make sure the file type is either jpg or png.</small>
+                        {% if form.logo.errors %}
+                        {% for error in form.logo.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                </fieldset>
+                <div class="add-project-button">
+                    <a class="btn btn-primary" href="{{ url_for('create_portfolio') }}">Add Project</a>
+                </div>
+                <div class="form-group">
+                    {{ form.submit(class="update") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        document.getElementById('add_link').addEventListener('click', function (e) {
+            e.preventDefault();
+            var newLink = document.createElement('div');
+            var csrfToken = document.querySelector('input[name="csrf_token"]').value;
+
+            newLink.innerHTML = `
+<input type="hidden" name="links-__index__-csrf_token" value="${csrfToken}">
+<input type="text" name="links-__index__-link" id="links-__index__-link" class="form-control mt-2">
+`;
+            newLink.innerHTML = newLink.innerHTML.replace(/__index__/g, document.querySelectorAll('#dynamic_links div').length);
+
+            document.getElementById('dynamic_links').appendChild(newLink);
+        });
+    });
+
+
+</script>
+{% endblock content%}
